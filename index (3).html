@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grade 6 STAR Math Explorer Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F3E7;
+    --paper-line: rgba(28,43,57,0.07);
+    --ink: #1C2B39;
+    --ink-soft: #4B5A66;
+    --gold: #B8811E;
+    --gold-bg: #FBF0DA;
+    --teal: #17766A;
+    --teal-bg: #E1F1EE;
+    --berry: #A3345B;
+    --berry-bg: #FBE7ED;
+    --card-bg: #FFFFFF;
+    --line: rgba(28,43,57,0.14);
+    --shadow: 0 1px 0 rgba(28,43,57,0.06);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17212B;
+      --paper-line: rgba(247,243,231,0.06);
+      --ink: #F3EFE4;
+      --ink-soft: #B7C2CA;
+      --gold-bg: rgba(184,129,30,0.16);
+      --teal-bg: rgba(23,118,106,0.18);
+      --berry-bg: rgba(163,52,91,0.18);
+      --card-bg: #202D38;
+      --line: rgba(247,243,231,0.14);
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #17212B;
+    --paper-line: rgba(247,243,231,0.06);
+    --ink: #F3EFE4;
+    --ink-soft: #B7C2CA;
+    --gold-bg: rgba(184,129,30,0.16);
+    --teal-bg: rgba(23,118,106,0.18);
+    --berry-bg: rgba(163,52,91,0.18);
+    --card-bg: #202D38;
+    --line: rgba(247,243,231,0.14);
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); height: 100%; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background:
+      repeating-linear-gradient(0deg, var(--paper-line) 0 1px, transparent 1px 34px),
+      repeating-linear-gradient(90deg, var(--paper-line) 0 1px, transparent 1px 34px),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 36px 22px 60px;
+  }
+  header {
+    margin-bottom: 22px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    margin: 0 0 6px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(28px, 4.5vw, 40px);
+    line-height: 1.1;
+    margin: 0 0 10px;
+    max-width: 16ch;
+  }
+  .sub {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    line-height: 1.55;
+    margin: 0 0 18px;
+  }
+  .howto {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .howto strong { color: var(--ink); }
+  .legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex: none;
+  }
+  .dot.gold { background: var(--gold); }
+  .dot.teal { background: var(--teal); }
+  .dot.berry { background: var(--berry); }
+
+  .banner {
+    margin: 18px 0 0;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: var(--gold-bg);
+    border: 1px solid var(--gold);
+    color: var(--ink);
+    font-size: 15px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+  .banner.show { display: flex; }
+
+  .col-heads {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0 10px;
+  }
+  .col-head {
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 0 4px;
+  }
+  .col-head.gold { color: var(--gold); }
+  .col-head.teal { color: var(--teal); }
+  .col-head.berry { color: var(--berry); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 14px; right: 14px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+  }
+  .card.gold::before { background: var(--gold); }
+  .card.teal::before { background: var(--teal); }
+  .card.berry::before { background: var(--berry); }
+
+  .card.done {
+    transform: translateY(1px);
+  }
+  .card.done .card-title { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+
+  .tier {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    display: inline-flex;
+    width: fit-content;
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .card.gold .tier { background: var(--gold-bg); color: var(--gold); }
+  .card.teal .tier { background: var(--teal-bg); color: var(--teal); }
+  .card.berry .tier { background: var(--berry-bg); color: var(--berry); }
+
+  .icon-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .icon {
+    width: 34px; height: 34px;
+  }
+  .card.gold .icon { color: var(--gold); }
+  .card.teal .icon { color: var(--teal); }
+  .card.berry .icon { color: var(--berry); }
+
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .card-title a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+  }
+  .card-title a:hover { border-bottom-color: currentColor; }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .open-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card.gold .open-link { color: var(--gold); }
+  .card.teal .open-link { color: var(--teal); }
+  .card.berry .open-link { color: var(--berry); }
+
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink-soft);
+    user-select: none;
+  }
+  .check input {
+    width: 16px; height: 16px;
+    accent-color: var(--ink);
+    cursor: pointer;
+  }
+
+  .foot-note {
+    margin-top: 30px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .top-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-reset {
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+  .btn-reset:hover { color: var(--ink); border-color: var(--ink-soft); }
+
+  @media (max-width: 720px) {
+    .grid, .col-heads { grid-template-columns: 1fr; }
+    .col-head { padding-top: 4px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .top-actions, .check { display: none !important; }
+    .banner { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top-actions">
+    <button class="btn-reset" onclick="resetBoard()">Reset checkmarks</button>
+    <button class="btn-reset" onclick="window.print()">Print</button>
+  </div>
+
+  <header>
+    <p class="eyebrow">STAR Math &middot; 6th grade enrichment</p>
+    <h1>Math Explorers Choice Board</h1>
+    <p class="sub">For students who finish early or want an extra push. Pick any square, do the activity, then check it off. Three checks in a row, across, down, or diagonal, earns Math Explorer status.</p>
+
+    <div class="howto">
+      <div class="legend">
+        <span class="legend-item"><span class="dot gold"></span>Puzzle &amp; logic</span>
+        <span class="legend-item"><span class="dot teal"></span>Deep investigations</span>
+        <span class="legend-item"><span class="dot berry"></span>Create &amp; share</span>
+      </div>
+      <span>Rows move from a quick spark &rarr; a solid challenge &rarr; a deep dive.</span>
+    </div>
+
+    <div class="banner" id="banner">🎉 <span><strong>Math Explorer!</strong> Three in a row, completed.</span></div>
+  </header>
+
+  <div class="col-heads">
+    <div class="col-head gold">Puzzle &amp; logic</div>
+    <div class="col-head teal">Deep investigations</div>
+    <div class="col-head berry">Create &amp; share</div>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- 1: gold quick -->
+    <div class="card gold" data-cell="0">
+      <div class="icon-row">
+        <span class="tier">Quick spark</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="5" y="5" width="30" height="30" rx="2"/>
+          <path d="M5 15h30M5 25h30M15 5v30M25 5v30"/>
+          <text x="10" y="13" font-size="7" stroke="none" fill="currentColor" font-family="Work Sans">6+</text>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://www.kenkenpuzzle.com/play_now" target="_blank" rel="noopener">KenKen warm up</a></h3>
+      <p class="card-desc">Solve one KenKen grid using logic and arithmetic together, no guessing allowed. Try to beat your own time on a second one.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://www.kenkenpuzzle.com/play_now" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(0)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 2: teal quick -->
+    <div class="card teal" data-cell="1">
+      <div class="icon-row">
+        <span class="tier">Quick spark</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="20" cy="20" r="14"/>
+          <path d="M9 20a11 11 0 0 1 22 0" stroke-dasharray="2 3"/>
+          <path d="M20 20l6-9"/>
+          <circle cx="20" cy="20" r="1.6" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://estimation180.com/" target="_blank" rel="noopener">Estimation face off</a></h3>
+      <p class="card-desc">Make an estimate, then justify it with real math, not a guess. Compare your reasoning with a partner's before the reveal.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://estimation180.com/" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(1)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 3: berry quick -->
+    <div class="card berry" data-cell="2">
+      <div class="icon-row">
+        <span class="tier">Quick spark</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 30V10M28 30V10"/>
+          <path d="M6 12h12M22 12h12"/>
+          <path d="M12 30l-6-6M28 30l6-6"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://www.wouldyourathermath.com/" target="_blank" rel="noopener">Would you rather, math edition</a></h3>
+      <p class="card-desc">Pick a side on a "would you rather" and prove your choice with calculations. Then argue your case to a partner who picked differently.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://www.wouldyourathermath.com/" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(2)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 4: gold medium -->
+    <div class="card gold" data-cell="3">
+      <div class="icon-row">
+        <span class="tier">Solid challenge</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="20" cy="20" r="15"/>
+          <circle cx="20" cy="20" r="9"/>
+          <circle cx="20" cy="20" r="3" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://www.openmiddle.com/" target="_blank" rel="noopener">Open Middle challenge</a></h3>
+      <p class="card-desc">Find any correct answer first, then hunt for the most efficient or elegant one. Search by grade 6 topic to match what the class is studying.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://www.openmiddle.com/" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(3)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 5: teal medium -->
+    <div class="card teal" data-cell="4">
+      <div class="icon-row">
+        <span class="tier">Solid challenge</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="17" cy="17" r="10"/>
+          <path d="M24.5 24.5L32 32"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://nrich.maths.org/" target="_blank" rel="noopener">NRICH rich task</a></h3>
+      <p class="card-desc">Choose a stage 3 task and write up a full solution, including why it works, not just the answer. Look for more than one way to solve it.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://nrich.maths.org/" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(4)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 6: berry medium -->
+    <div class="card berry" data-cell="5">
+      <div class="icon-row">
+        <span class="tier">Solid challenge</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 15l12-8 12 8v14l-12 8-12-8z"/>
+          <text x="14" y="24" font-size="9" stroke="none" fill="currentColor" font-family="Work Sans">%</text>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://teacher.desmos.com/" target="_blank" rel="noopener">Design a deal</a></h3>
+      <p class="card-desc">Using a real ad or coupon, design your own "best deal" ratio or percent problem, work out the answer key, then trade with a classmate to solve.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://teacher.desmos.com/" target="_blank" rel="noopener">Browse Desmos &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(5)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 7: gold deep -->
+    <div class="card gold" data-cell="6">
+      <div class="icon-row">
+        <span class="tier">Deep dive</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6c-8 6-8 14-8 14a8 8 0 0 0 16 0s0-8-8-14z"/>
+          <path d="M16 30h8M17 34h6"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://mathpickle.com/organized-by-grade/" target="_blank" rel="noopener">MathPickle investigation</a></h3>
+      <p class="card-desc">Take on a genuinely hard, unsolved style puzzle from the grade 6 collection. It's fine to get stuck. Record what you tried and what you noticed.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://mathpickle.com/organized-by-grade/" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(6)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 8: teal deep -->
+    <div class="card teal" data-cell="7">
+      <div class="icon-row">
+        <span class="tier">Deep dive</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="7" y="8" width="26" height="24" rx="2"/>
+          <path d="M7 15h26M13 5v6M27 5v6"/>
+          <path d="M15 23l3 3 7-7"/>
+        </svg>
+      </div>
+      <h3 class="card-title"><a href="https://www.mathcounts.org/resources/problem-week-archive" target="_blank" rel="noopener">MATHCOUNTS Problem of the Week</a></h3>
+      <p class="card-desc">Pull a problem from the archive and show full, clearly labeled work. These are competition level, expect to revise your approach at least once.</p>
+      <div class="card-foot">
+        <a class="open-link" href="https://www.mathcounts.org/resources/problem-week-archive" target="_blank" rel="noopener">Open activity &rarr;</a>
+        <label class="check"><input type="checkbox" onchange="toggle(7)"> Done</label>
+      </div>
+    </div>
+
+    <!-- 9: berry deep -->
+    <div class="card berry" data-cell="8">
+      <div class="icon-row">
+        <span class="tier">Deep dive</span>
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 10h20a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H16l-6 5v-5H8a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/>
+          <path d="M12 17h12M12 22h8"/>
+        </svg>
+      </div>
+      <h3 class="card-title">Teach it forward</h3>
+      <p class="card-desc">Pick a concept you find easy but others find tricky. Build a short poster, slideshow, or worked example that teaches it to a classmate who's stuck.</p>
+      <div class="card-foot">
+        <span class="open-link" style="opacity:0.55;">No link, your own work</span>
+        <label class="check"><input type="checkbox" onchange="toggle(8)"> Done</label>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="foot-note">Tip for teachers: swap card 6 ("Design a deal") or card 9 ("Teach it forward") to match whatever unit the class is currently on: ratios, expressions, statistics, etc. Checkmarks are saved in this browser only, so they reset on a shared classroom computer between students unless you print instead.</p>
+
+</div>
+
+<script>
+  const WIN_LINES = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  const STORAGE_KEY = 'mathExplorersBoard';
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function applyState() {
+    const state = loadState();
+    document.querySelectorAll('[data-cell]').forEach(card => {
+      const i = card.getAttribute('data-cell');
+      const checked = !!state[i];
+      card.classList.toggle('done', checked);
+      const box = card.querySelector('input[type="checkbox"]');
+      if (box) box.checked = checked;
+    });
+    checkWin(state);
+  }
+
+  function toggle(i) {
+    const state = loadState();
+    state[i] = !state[i];
+    saveState(state);
+    applyState();
+  }
+
+  function checkWin(state) {
+    const banner = document.getElementById('banner');
+    const won = WIN_LINES.some(line => line.every(i => state[i]));
+    banner.classList.toggle('show', won);
+  }
+
+  function resetBoard() {
+    saveState({});
+    applyState();
+  }
+
+  applyState();
+</script>
+
+</body>
+</html>
